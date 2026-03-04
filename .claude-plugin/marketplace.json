@@ -1,0 +1,25 @@
+{
+  "name": "pm-tools",
+  "owner": {
+    "name": "Dakota Radigan",
+    "url": "https://github.com/dakotaradigan"
+  },
+  "metadata": {
+    "description": "Solution management plugins for Claude Code",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "solution-work",
+      "description": "AI-assisted solution management tools for user research synthesis, requirements generation, and workshop preparation. 3 commands, 3 skills, 2 agents.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Dakota Radigan",
+        "url": "https://github.com/dakotaradigan"
+      },
+      "homepage": "https://github.com/dakotaradigan/PM-Tools",
+      "tags": ["solution-management", "user-research", "requirements", "product-management", "workshop"],
+      "source": "./plugins/solution-manager-toolkit"
+    }
+  ]
+}

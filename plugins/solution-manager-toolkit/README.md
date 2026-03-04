@@ -8,9 +8,11 @@ This plugin automates the repetitive parts of the solution management workflow w
 
 | Command | What It Does |
 |---------|-------------|
-| `/synthesize-research` | Takes raw interview notes, survey responses, and workshop transcripts → outputs structured problem statements, persona cards, and theme matrices |
-| `/generate-requirements` | Takes synthesized problem statements → outputs user stories, acceptance criteria, and NFRs |
-| `/workshop-prep` | Takes a workshop goal and participant list → outputs timed agenda, discussion prompts, and pre-read materials |
+| `/solution-work:synthesize-research` | Takes raw interview notes, survey responses, and workshop transcripts → outputs structured problem statements, persona cards, and theme matrices |
+| `/solution-work:generate-requirements` | Takes synthesized problem statements → outputs user stories, acceptance criteria, and NFRs |
+| `/solution-work:workshop-prep` | Takes a workshop goal and participant list → outputs timed agenda, discussion prompts, and pre-read materials |
+
+Type `/solution-work` in Claude Code to see all available commands.
 
 ## Components
 
@@ -20,24 +22,27 @@ This plugin automates the repetitive parts of the solution management workflow w
 
 ## Installation
 
-### As a Claude Code Plugin
+### Step 1: Add the marketplace (one time)
 
-Copy this directory to your Claude Code plugins path:
+In Claude Code, run:
 
-```bash
-cp -r solution-manager-toolkit ~/.claude/plugins/local/solution-manager-toolkit
+```
+/plugin marketplace add https://github.com/dakotaradigan/PM-Tools.git
 ```
 
-Or clone from GitHub and symlink:
+### Step 2: Install the plugin
 
-```bash
-git clone https://github.com/dakotaradigan/solution-manager-toolkit.git
-ln -s $(pwd)/solution-manager-toolkit ~/.claude/plugins/local/solution-manager-toolkit
+```
+/plugin install solution-work
 ```
 
-### As Individual Skills
+That's it. Type `/solution-work` to see all commands.
 
-Copy any skill's `SKILL.md` to `~/.claude/skills/<skill-name>/SKILL.md`.
+### Uninstall
+
+```
+/plugin uninstall solution-work
+```
 
 ## Usage
 
@@ -46,7 +51,7 @@ Copy any skill's `SKILL.md` to `~/.claude/skills/<skill-name>/SKILL.md`.
 Place your research files (markdown) in a directory, then:
 
 ```
-/synthesize-research
+/solution-work:synthesize-research
 ```
 
 The command will find your files, extract themes in parallel, and generate:
@@ -60,7 +65,7 @@ The command will find your files, extract themes in parallel, and generate:
 After synthesis, run:
 
 ```
-/generate-requirements
+/solution-work:generate-requirements
 ```
 
 Generates:
@@ -71,7 +76,7 @@ Generates:
 ### Workshop Prep
 
 ```
-/workshop-prep
+/solution-work:workshop-prep
 ```
 
 Generates:

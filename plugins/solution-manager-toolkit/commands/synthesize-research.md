@@ -1,5 +1,5 @@
 ---
-name: solution-work:synthesize-research
+name: synthesize-research
 description: Synthesize raw user research into structured problem statements, personas, and theme matrices
 allowed-tools: Read, Glob, Grep, Write, Agent, Bash
 user-invocable: true

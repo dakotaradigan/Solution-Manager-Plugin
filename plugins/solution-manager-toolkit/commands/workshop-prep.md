@@ -1,5 +1,5 @@
 ---
-name: solution-work:workshop-prep
+name: workshop-prep
 description: Generate workshop agenda, discussion prompts, and structured preparation materials
 allowed-tools: Read, Glob, Grep, Write, Bash
 user-invocable: true

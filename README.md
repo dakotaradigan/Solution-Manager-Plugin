@@ -272,18 +272,22 @@ Each step builds on the previous one's output files.
 
 ## Installation
 
-### Install the standalone skill
+### Install the plugin (recommended)
 
-```bash
-git clone https://github.com/dakotaradigan/tool-kit.git
-cp -r tool-kit/skills/user-research-synthesizer ~/.claude/skills/
+In Claude Code, run:
+
+```
+/plugin marketplace add https://github.com/dakotaradigan/PM-Tools.git
+/plugin install solution-work
 ```
 
-### Install the full plugin
+Type `/solution-work` to see all commands.
+
+### Install the standalone skill only
 
 ```bash
-git clone https://github.com/dakotaradigan/tool-kit.git
-cp -r tool-kit/plugins/solution-manager-toolkit ~/.claude/plugins/local/
+git clone https://github.com/dakotaradigan/PM-Tools.git
+cp -r PM-Tools/skills/user-research-synthesizer ~/.claude/skills/
 ```
 
 ### Try it with sample data

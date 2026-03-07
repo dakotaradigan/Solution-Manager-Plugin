@@ -1,92 +1,91 @@
 # Solution Manager Toolkit
 
-A Claude Code plugin that turns raw user research into structured deliverables — synthesized themes, personas, requirements docs, and workshop materials — in minutes instead of days.
+Turn vague product problems into spec'd, reviewed, ready-to-build solution artifacts — without leaving your terminal.
 
-## What It Does
+This is a Claude Code plugin for investment management teams. You type slash commands, it walks you through structured workflows and writes the output as markdown files you can version, share, and build from.
 
-Three commands that chain together across the solution management workflow:
-
-| Command | What It Does |
-|---------|-------------|
-| `/solution-work:synthesize-research` | Processes interview notes, survey data, and workshop transcripts into personas, problem statements, and a theme matrix. Runs parallel agents to extract themes from each source simultaneously, then merges and cross-references findings. |
-| `/solution-work:generate-requirements` | Takes the synthesized problem statements and generates user stories (with MoSCoW priority), acceptance criteria, and non-functional requirements — all traced back to the original research. |
-| `/solution-work:workshop-prep` | Generates a timed agenda, facilitation prompts, and a pre-read doc based on your workshop type (discovery, validation, prioritization, or design) and participant roles. |
-
-Each command also has a matching **skill** that activates automatically when you describe the task in plain language — no slash command needed.
-
-## Example
-
-```
-# Drop your raw research files into a research/ folder
-mkdir research
-cp ~/Downloads/interview-notes-*.md research/
-cp ~/Downloads/survey-export.csv research/
-
-# Run synthesis — agents process each file in parallel
-> /solution-work:synthesize-research
-
-  Step 1: Found 5 files in research/
-  Step 2: Classified — 3 interviews, 1 survey, 1 workshop transcript
-  Step 3: Launching 5 theme-extractor agents in parallel...
-  Step 4: Merged 47 observations into 8 themes
-  Step 5: Generated personas, problem statements, theme matrix
-  Step 6: Institutional knowledge review — 2 coverage gaps flagged
-
-  Output written to synthesis/
-
-# Generate requirements from the synthesis
-> /solution-work:generate-requirements
-
-  Reading synthesis/problem-statements.md...
-  Generated 24 user stories, 68 acceptance criteria, 9 NFRs
-
-  Output written to requirements/
-
-# Prep for next week's validation workshop
-> /solution-work:workshop-prep
-
-  Workshop type: validation
-  Duration: 90 minutes
-  Participants: 2 PMs, 1 trader, 1 compliance officer
-
-  Output written to workshop/
-```
-
-Your notes can be messy — raw copy-pastes from meetings, unformatted transcripts, freeform observations. The plugin handles unstructured input.
-
-## Installation
-
-### 1. Add the marketplace
+## Quick Start
 
 ```bash
+# Install (one time)
 claude plugin marketplace add https://github.com/dakotaradigan/PM-Tools
-```
-
-### 2. Install the plugin
-
-```bash
 claude plugin install solution-work@pm-tools
-```
-
-### 3. Enable the plugin
-
-```bash
 claude plugin enable solution-work@pm-tools
+# Restart Claude Code
 ```
 
-### 4. Restart Claude Code
+Then run:
 
-Type `/solution-work` to see all available commands.
+```
+/solution-work:start
+```
 
-### Uninstall
+It asks what you're working on, picks the right workflow, and walks you through each step. That's the only command you need to remember.
+
+If you already know what you want, jump straight to any command:
+
+```
+/solution-work:brainstorm       # "We have a problem but haven't scoped it yet"
+/solution-work:discover         # "We have a codebase — what's in it?"
+/solution-work:synthesize-research  # "We have interview notes / survey data"
+/solution-work:help             # "Show me everything"
+```
+
+Typing `/solution-work:` shows all available commands in a dropdown.
+
+## What You Get
+
+You describe a problem. The toolkit walks you through defining it:
+
+```
+/solution-work:brainstorm           → brainstorm/topic-summary.md
+/solution-work:synthesize-research  → synthesis/themes, personas, problem statements
+/solution-work:discover             → discovery/entities, APIs, dependencies
+/solution-work:generate-requirements → requirements/user stories + acceptance criteria
+/solution-work:datamodel            → data-model/canonical entities + governance
+/solution-work:apicontract          → api-contracts/endpoints + schemas
+/solution-work:eventspec            → event-specs/schemas + delivery guarantees
+/solution-work:nfr                  → requirements/NFRs with measurable targets
+/solution-work:review               → review/completeness scores + cross-reference gaps
+/solution-work:architecture         → architecture/ADRs with tradeoff matrices
+/solution-work:piplan               → pi-planning/features, WSJF, dependencies, risks
+/solution-work:workshop-prep        → workshop materials + facilitation guides
+/solution-work:status               → progress summary across all artifacts
+/solution-work:help                 → command reference
+```
+
+Every output is a markdown file. Nothing is locked in a tool — you own the artifacts.
+
+## The Workflow
+
+You don't have to run everything. Start wherever you are:
+
+```
+brainstorm → synthesize-research → discover → datamodel → apicontract
+→ eventspec → nfr → review → architecture → piplan
+```
+
+Most teams start with `brainstorm` or `discover`, run 3-4 commands, then `review` to find gaps.
+
+## Team Setup
+
+The toolkit ships with investment management domain knowledge (instruments, regulations, failure modes). To get the most out of it, fill in your team's specific context.
+
+| File | What It Contains | Action |
+|------|-----------------|--------|
+| `references/domain-knowledge-base.md` | Generic checklists, NFR format, review patterns | Keep as-is |
+| `references/domain-knowledge.md` | Investment management domain knowledge | Review and extend for your firm |
+| `references/team-context.md` | **Your team's systems, custodians, org structure** | **Fill in for your team** |
+
+Commands still work without team context — you just get more grounded outputs the more you fill in.
+
+## Uninstall
 
 ```bash
 claude plugin uninstall solution-work@pm-tools
 ```
 
-### Try with sample data
-
-The repo includes synthetic research data (3 interviews, 1 workshop transcript, 1 survey) for a market data platform discovery:
+## Try with Sample Data
 
 ```bash
 git clone https://github.com/dakotaradigan/PM-Tools.git

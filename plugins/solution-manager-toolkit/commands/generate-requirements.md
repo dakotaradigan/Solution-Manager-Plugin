@@ -1,5 +1,5 @@
 ---
-name: generate-requirements
+name: solution-work:generate-requirements
 description: Generate user stories, acceptance criteria, and NFRs from synthesized problem statements
 allowed-tools: Read, Glob, Grep, Write, Bash
 user-invocable: true

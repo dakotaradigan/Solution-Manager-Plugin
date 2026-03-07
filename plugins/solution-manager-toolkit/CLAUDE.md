@@ -11,10 +11,9 @@ Plugin name: `solution-work` — commands are invoked as `/solution-work:<comman
   plugin.json          # Plugin metadata — "name" field sets the /solution-work: prefix
 
 commands/
-  solutions/
-    synthesize-research.md   # /solutions:synthesize-research
-    generate-requirements.md # /solutions:generate-requirements
-    workshop-prep.md         # /solutions:workshop-prep
+  synthesize-research.md   # /solution-work:synthesize-research
+  generate-requirements.md # /solution-work:generate-requirements
+  workshop-prep.md         # /solution-work:workshop-prep
 
 skills/
   research-synthesizer/SKILL.md    # Research synthesis skill
@@ -31,6 +30,7 @@ agents/
 ```bash
 claude plugin marketplace add https://github.com/dakotaradigan/PM-Tools
 claude plugin install solution-work@pm-tools
+claude plugin enable solution-work@pm-tools
 ```
 
 Restart Claude Code after installing.

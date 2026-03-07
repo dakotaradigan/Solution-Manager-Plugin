@@ -8,9 +8,9 @@ Three commands that chain together across the solution management workflow:
 
 | Command | What It Does |
 |---------|-------------|
-| `/solutions:synthesize-research` | Processes interview notes, survey data, and workshop transcripts into personas, problem statements, and a theme matrix. Runs parallel agents to extract themes from each source simultaneously, then merges and cross-references findings. |
-| `/solutions:generate-requirements` | Takes the synthesized problem statements and generates user stories (with MoSCoW priority), acceptance criteria, and non-functional requirements — all traced back to the original research. |
-| `/solutions:workshop-prep` | Generates a timed agenda, facilitation prompts, and a pre-read doc based on your workshop type (discovery, validation, prioritization, or design) and participant roles. |
+| `/solution-work:synthesize-research` | Processes interview notes, survey data, and workshop transcripts into personas, problem statements, and a theme matrix. Runs parallel agents to extract themes from each source simultaneously, then merges and cross-references findings. |
+| `/solution-work:generate-requirements` | Takes the synthesized problem statements and generates user stories (with MoSCoW priority), acceptance criteria, and non-functional requirements — all traced back to the original research. |
+| `/solution-work:workshop-prep` | Generates a timed agenda, facilitation prompts, and a pre-read doc based on your workshop type (discovery, validation, prioritization, or design) and participant roles. |
 
 Each command also has a matching **skill** that activates automatically when you describe the task in plain language — no slash command needed.
 
@@ -23,7 +23,7 @@ cp ~/Downloads/interview-notes-*.md research/
 cp ~/Downloads/survey-export.csv research/
 
 # Run synthesis — agents process each file in parallel
-> /solutions:synthesize-research
+> /solution-work:synthesize-research
 
   Step 1: Found 5 files in research/
   Step 2: Classified — 3 interviews, 1 survey, 1 workshop transcript
@@ -35,7 +35,7 @@ cp ~/Downloads/survey-export.csv research/
   Output written to synthesis/
 
 # Generate requirements from the synthesis
-> /solutions:generate-requirements
+> /solution-work:generate-requirements
 
   Reading synthesis/problem-statements.md...
   Generated 24 user stories, 68 acceptance criteria, 9 NFRs
@@ -43,7 +43,7 @@ cp ~/Downloads/survey-export.csv research/
   Output written to requirements/
 
 # Prep for next week's validation workshop
-> /solutions:workshop-prep
+> /solution-work:workshop-prep
 
   Workshop type: validation
   Duration: 90 minutes
@@ -68,9 +68,21 @@ claude plugin marketplace add https://github.com/dakotaradigan/PM-Tools
 claude plugin install solution-work@pm-tools
 ```
 
-### 3. Restart Claude Code
+### 3. Enable the plugin
 
-Type `/solutions` to see all available commands.
+```bash
+claude plugin enable solution-work@pm-tools
+```
+
+### 4. Restart Claude Code
+
+Type `/solution-work` to see all available commands.
+
+### Uninstall
+
+```bash
+claude plugin uninstall solution-work@pm-tools
+```
 
 ### Try with sample data
 
@@ -79,7 +91,7 @@ The repo includes synthetic research data (3 interviews, 1 workshop transcript, 
 ```bash
 git clone https://github.com/dakotaradigan/PM-Tools.git
 cd PM-Tools/sample-data
-# Open Claude Code and run /solutions:synthesize-research
+# Open Claude Code and run /solution-work:synthesize-research
 ```
 
 ## Optional: MCP Server Integrations

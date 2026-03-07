@@ -22,26 +22,32 @@ Type `/solution-work` in Claude Code to see all available commands.
 
 ## Installation
 
-### Step 1: Add the marketplace (one time)
+### 1. Add the marketplace (one time)
 
-In Claude Code, run:
-
-```
-/plugin marketplace add https://github.com/dakotaradigan/PM-Tools.git
+```bash
+claude plugin marketplace add https://github.com/dakotaradigan/PM-Tools
 ```
 
-### Step 2: Install the plugin
+### 2. Install the plugin
 
-```
-/plugin install solution-work
+```bash
+claude plugin install solution-work@pm-tools
 ```
 
-That's it. Type `/solution-work` to see all commands.
+### 3. Enable the plugin
+
+```bash
+claude plugin enable solution-work@pm-tools
+```
+
+### 4. Restart Claude Code
+
+Type `/solution-work` to see all available commands.
 
 ### Uninstall
 
-```
-/plugin uninstall solution-work
+```bash
+claude plugin uninstall solution-work@pm-tools
 ```
 
 ## Usage

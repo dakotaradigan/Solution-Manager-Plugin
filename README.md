@@ -79,6 +79,14 @@ The toolkit ships with investment management domain knowledge (instruments, regu
 
 Commands still work without team context — you just get more grounded outputs the more you fill in.
 
+## Updating
+
+```bash
+claude plugin marketplace update pm-tools
+claude plugin update solution-work@pm-tools
+# Restart Claude Code
+```
+
 ## Uninstall
 
 ```bash

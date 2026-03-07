@@ -89,6 +89,14 @@ The toolkit ships with investment management domain knowledge (instruments, regu
 
 Commands still work — they just won't have your team's specific systems and org context. Domain knowledge (instruments, regulations, NFR defaults) still applies. The more you fill in, the more grounded the outputs.
 
+## Updating
+
+```bash
+claude plugin marketplace update pm-tools
+claude plugin update solution-work@pm-tools
+# Restart Claude Code
+```
+
 ## Uninstall
 
 ```bash

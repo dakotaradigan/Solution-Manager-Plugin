@@ -14,7 +14,7 @@ Display the complete command registry and usage guidance.
 1. **Display command registry:**
 
    ```
-   Solution Manager Toolkit v0.2.0
+   Solution Manager Toolkit v0.3.0
    ================================
 
    START HERE

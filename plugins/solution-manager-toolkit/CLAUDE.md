@@ -23,7 +23,7 @@ Plugin name: `solution-work` — commands invoked as `/solution-work:<command>`.
 
 Commands reference `base` and `domain-knowledge` by section heading. Required sections in domain-knowledge: Domain Identifiers, NFR Defaults, Regulatory Requirements, Common Failure Modes, Domain Validation Flags. Missing sections degrade gracefully (commands skip domain checks, don't crash). Team context is optional but enriches discover, piplan, architecture, and review.
 
-## Command Registry (15 commands)
+## Command Registry (16 commands)
 
 ### Start Here
 | Command | Description |
@@ -35,6 +35,7 @@ Commands reference `base` and `domain-knowledge` by section heading. Required se
 |---------|-------------|
 | `synthesize-research` | Synthesize raw user research into themes, personas, problem statements |
 | `discover` | Analyze codebase for data models, APIs, dependencies |
+| `explain-code` | Explain what code does in plain, non-technical language |
 | `brainstorm` | Interactive exploration of a problem space before formal definition |
 
 ### Definition
@@ -66,9 +67,9 @@ Commands reference `base` and `domain-knowledge` by section heading. Required se
 brainstorm → synthesize-research → discover → datamodel → apicontract → eventspec → nfr → review → architecture → piplan
 ```
 
-## Skills (9)
+## Skills (10)
 
-research-synthesizer, requirements-generator, workshop-prep, codebase-discovery, nfr-definition, canonical-data, api-contracts, event-integration, pi-planning
+research-synthesizer, requirements-generator, workshop-prep, codebase-discovery, code-explainer, nfr-definition, canonical-data, api-contracts, event-integration, pi-planning
 
 ## Agents (4)
 
@@ -96,8 +97,8 @@ references/
   domain-knowledge.md            # investment management domain knowledge
   team-context.md                # your team's systems, custodians, org (fill in)
   solution-state-template.md
-commands/        (15 command files)
-skills/          (9 skill directories)
+commands/        (16 command files)
+skills/          (10 skill directories)
 agents/          (4 agent files)
 ```
 

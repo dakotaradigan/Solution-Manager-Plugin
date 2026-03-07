@@ -14,7 +14,7 @@ Display the complete command registry and usage guidance.
 1. **Display command registry:**
 
    ```
-   Solution Manager Toolkit v0.3.0
+   Solution Manager Toolkit v0.4.0
    ================================
 
    START HERE
@@ -23,6 +23,7 @@ Display the complete command registry and usage guidance.
    RESEARCH & DISCOVERY
      /solution-work:synthesize-research  — Synthesize raw user research into themes, personas, problem statements
      /solution-work:discover             — Analyze codebase for data models, APIs, dependencies
+     /solution-work:explain-code         — Explain what code does in plain, non-technical language
      /solution-work:brainstorm           — Interactive exploration of a problem space before formal definition
 
    DEFINITION

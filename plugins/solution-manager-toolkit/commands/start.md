@@ -21,9 +21,10 @@ Single entry point for the entire toolkit. Figures out where you are, picks the 
    1. Exploring a new problem (not sure what to build yet)
    2. We have user research to process (interviews, surveys, feedback)
    3. We have an existing codebase to map
-   4. We need to define the solution (data models, APIs, events, NFRs)
-   5. We need to review what we've built so far
-   6. We're preparing for PI Planning
+   4. We need someone to explain what code does (non-technical)
+   5. We need to define the solution (data models, APIs, events, NFRs)
+   6. We need to review what we've built so far
+   7. We're preparing for PI Planning
 
    Or just describe what you're doing and I'll figure out where to start.
    ```
@@ -35,6 +36,7 @@ Single entry point for the entire toolkit. Figures out where you are, picks the 
    | Exploring a new problem | `brainstorm` → `generate-requirements` → `review` |
    | Have user research | `synthesize-research` → `generate-requirements` → `review` |
    | Have an existing codebase | `discover` → `datamodel` → `apicontract` → `review` |
+   | Need code explained (non-technical) | `explain-code` |
    | Need to define the solution | `datamodel` → `apicontract` → `eventspec` → `nfr` → `review` |
    | Need to review | `review` |
    | Preparing for PI Planning | `review` → `architecture` → `piplan` |

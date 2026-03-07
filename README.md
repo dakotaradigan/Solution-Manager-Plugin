@@ -39,6 +39,7 @@ Type `/solution` and the command palette shows every available command with desc
   /solution-work:start              Guided walkthrough — tell me what you're working on and I'll run the right commands
   /solution-work:brainstorm         Interactive exploration of a problem space before formal definition
   /solution-work:discover           Analyze an existing codebase to extract data models, API endpoints, dependencies
+  /solution-work:explain-code       Explain what code does in plain, non-technical language
   /solution-work:synthesize-research  Synthesize raw user research into themes, personas, problem statements
   /solution-work:generate-requirements  Generate user stories, acceptance criteria from problem statements
   /solution-work:datamodel          Define canonical data models with governance

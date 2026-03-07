@@ -75,7 +75,7 @@ The toolkit ships with investment management domain knowledge (instruments, regu
 |------|-----------------|--------|
 | `references/domain-knowledge-base.md` | Generic checklists, NFR format, review patterns | Keep as-is |
 | `references/domain-knowledge.md` | Investment management domain knowledge | Review and extend for your firm |
-| `references/team-context.md` | **Your team's systems, custodians, org structure** | **Fill in for your team** |
+| `references/team-context.md` | **Your team's systems, org structure** | **Fill in for your team** |
 
 Commands still work without team context — you just get more grounded outputs the more you fill in.
 

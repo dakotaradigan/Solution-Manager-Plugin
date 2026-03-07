@@ -53,39 +53,7 @@ Type `/solution` and the command palette shows every available command with desc
   /solution-work:help               Display command registry and workflow guidance
 ```
 
-## What You Get
-
-You describe a problem. The toolkit walks you through defining it:
-
-```
-/solution-work:brainstorm           → brainstorm/topic-summary.md
-/solution-work:synthesize-research  → synthesis/themes, personas, problem statements
-/solution-work:discover             → discovery/entities, APIs, dependencies
-/solution-work:generate-requirements → requirements/user stories + acceptance criteria
-/solution-work:datamodel            → data-model/canonical entities + governance
-/solution-work:apicontract          → api-contracts/endpoints + schemas
-/solution-work:eventspec            → event-specs/schemas + delivery guarantees
-/solution-work:nfr                  → requirements/NFRs with measurable targets
-/solution-work:review               → review/completeness scores + cross-reference gaps
-/solution-work:architecture         → architecture/ADRs with tradeoff matrices
-/solution-work:piplan               → pi-planning/features, WSJF, dependencies, risks
-/solution-work:workshop-prep        → workshop materials + facilitation guides
-/solution-work:status               → progress summary across all artifacts
-/solution-work:help                 → command reference
-```
-
-Every output is a markdown file. Nothing is locked in a tool — you own the artifacts.
-
-## The Workflow
-
-You don't have to run everything. Start wherever you are:
-
-```
-brainstorm → synthesize-research → discover → datamodel → apicontract
-→ eventspec → nfr → review → architecture → piplan
-```
-
-Most teams start with `brainstorm` or `discover`, run 3-4 commands, then `review` to find gaps.
+You describe a problem. The toolkit walks you through defining it. Every output is a markdown file. Nothing is locked in a tool — you own the artifacts.
 
 ## Team Setup
 

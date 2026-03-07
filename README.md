@@ -20,7 +20,7 @@ Then run:
 /solution-work:start
 ```
 
-It asks what you're working on, picks the right workflow, and walks you through each step. That's the only command you need to remember.
+It asks what you're working on, picks the right workflow, and walks you through each step. That's the only command you need to remember. Don't have your own data yet? [Try it with the sample data below.](#try-it)
 
 If you already know what you want, jump straight to any command:
 
@@ -81,13 +81,47 @@ claude plugin update solution-work@solution-manager-plugin
 claude plugin uninstall solution-work@solution-manager-plugin
 ```
 
-## Try with Sample Data
+## Try It
+
+The repo includes sample data so you can test the plugin without your own files. Clone it and pick a path:
 
 ```bash
 git clone https://github.com/dakotaradigan/Solution-Manager-Plugin.git
 cd Solution-Manager-Plugin/sample-data
-# Open Claude Code and run /solution-work:synthesize-research
 ```
+
+### Option 1: Brainstorm a problem
+
+There's a messy intake — a forwarded email about a bad fill from stale pricing, plus a Slack thread where three people notice Bloomberg, Refinitiv, and the internal system all show different prices.
+
+```bash
+cd brainstorm
+# Open Claude Code, then:
+/solution-work:brainstorm
+# When asked what you're exploring, point it at problem-brief.md
+```
+
+### Option 2: Discover a codebase
+
+There's a Python portfolio management app with data models, 15 API endpoints, custodian recon, and drift calculation.
+
+```bash
+cd codebase
+# Open Claude Code, then:
+/solution-work:discover
+```
+
+### Option 3: Synthesize user research
+
+There are 5 research files — 3 interviews (trader, ops manager, quant), a 34-person survey, and workshop notes — all from a market data platform discovery.
+
+```bash
+cd research
+# Open Claude Code, then:
+/solution-work:synthesize-research
+```
+
+Each command produces output files and suggests what to run next. Or just run `/solution-work:start` and it will figure out which sample data to use.
 
 ## Optional: MCP Server Integrations
 

@@ -20,9 +20,9 @@ Then run:
 /solution-work:start
 ```
 
-It asks what you're working on, picks the right workflow, and walks you through each step. That's the only command you need to remember.
+It asks what you're working on, picks the right workflow, and walks you through each step. That's the only command you need to remember. Don't have your own data yet? [Try it with the sample data below.](#try-it)
 
-If you already know what you want, you can jump straight to any command:
+If you already know what you want, jump straight to any command:
 
 ```
 /solution-work:brainstorm       # "We have a problem but haven't scoped it yet"
@@ -31,63 +31,41 @@ If you already know what you want, you can jump straight to any command:
 /solution-work:help             # "Show me everything"
 ```
 
-Typing `/solution-work:` shows all available commands in a dropdown.
-
-## What You Get
-
-You describe a problem. The toolkit walks you through defining it:
+Type `/solution` and the command palette shows every available command with descriptions:
 
 ```
-/solution-work:brainstorm           → brainstorm/topic-summary.md
-/solution-work:synthesize-research  → synthesis/themes, personas, problem statements
-/solution-work:discover             → discovery/entities, APIs, dependencies
-/solution-work:generate-requirements → requirements/user stories + acceptance criteria
-/solution-work:datamodel            → data-model/canonical entities + governance
-/solution-work:apicontract          → api-contracts/endpoints + schemas
-/solution-work:eventspec            → event-specs/schemas + delivery guarantees
-/solution-work:nfr                  → requirements/NFRs with measurable targets
-/solution-work:review               → review/completeness scores + cross-reference gaps
-/solution-work:architecture         → architecture/ADRs with tradeoff matrices
-/solution-work:piplan               → pi-planning/features, WSJF, dependencies, risks
-/solution-work:workshop-prep        → workshop materials + facilitation guides
-/solution-work:status               → progress summary across all artifacts
-/solution-work:help                 → command reference
+> /solution
+
+  /solution-work:start              Guided walkthrough — tell me what you're working on and I'll run the right commands
+  /solution-work:brainstorm         Interactive exploration of a problem space before formal definition
+  /solution-work:discover           Analyze an existing codebase to extract data models, API endpoints, dependencies
+  /solution-work:synthesize-research  Synthesize raw user research into themes, personas, problem statements
+  /solution-work:generate-requirements  Generate user stories, acceptance criteria from problem statements
+  /solution-work:datamodel          Define canonical data models with governance
+  /solution-work:apicontract        Define contract-first API specifications
+  /solution-work:eventspec          Define event schemas with delivery guarantees
+  /solution-work:nfr                Define non-functional requirements with measurable targets
+  /solution-work:architecture       Facilitate architecture decisions with tradeoff matrices
+  /solution-work:piplan             Prepare for SAFe PI Planning with WSJF prioritization
+  /solution-work:workshop-prep      Generate workshop agendas and facilitation materials
+  /solution-work:review             Run completeness and cross-reference checks across all artifacts
+  /solution-work:status             Generate solution progress report
+  /solution-work:help               Display command registry and workflow guidance
 ```
 
-Every output is a markdown file. Nothing is locked in a tool — you own the artifacts.
-
-## The Workflow
-
-You don't have to run everything. Start wherever you are:
-
-```
-brainstorm → synthesize-research → discover → datamodel → apicontract
-→ eventspec → nfr → review → architecture → piplan
-```
-
-Most teams start with `brainstorm` or `discover`, run 3-4 commands, then `review` to find gaps.
+You describe a problem. The toolkit walks you through defining it. Every output is a markdown file. Nothing is locked in a tool — you own the artifacts.
 
 ## Team Setup
 
 The toolkit ships with investment management domain knowledge (instruments, regulations, failure modes). To get the most out of it, fill in your team's specific context.
 
-### Reference files
-
 | File | What It Contains | Action |
 |------|-----------------|--------|
-| `references/domain-knowledge-base.md` | Generic checklists, NFR format, review patterns | Keep as-is (extend if needed, don't remove items) |
-| `references/domain-knowledge.md` | Investment management domain knowledge (instruments, regulations, strategies) | Review and extend for your firm's specifics |
-| `references/team-context.md` | **Your team's systems, custodians, org structure, codebase conventions** | **Fill in for your team** |
+| `references/domain-knowledge-base.md` | Generic checklists, NFR format, review patterns | Keep as-is |
+| `references/domain-knowledge.md` | Investment management domain knowledge | Review and extend for your firm |
+| `references/team-context.md` | **Your team's systems, org structure** | **Fill in for your team** |
 
-### How to set up
-
-1. **Fill in `references/team-context.md`** — This is a blank form with tables for your OMS, custodians, team ownership, codebase conventions, vendor integrations, and stakeholders. Commands like `discover`, `piplan`, `architecture`, and `review` reference it for team-specific context.
-
-2. **Review `references/domain-knowledge.md`** — Ships with investment management content (direct indexing, TLH, overlay strategies, SMA/UMA, custodian recon). Extend it with your firm's specific instruments, regulations, or failure modes if needed.
-
-### What happens if team-context.md is empty?
-
-Commands still work — they just won't have your team's specific systems and org context. Domain knowledge (instruments, regulations, NFR defaults) still applies. The more you fill in, the more grounded the outputs.
+Commands still work without team context — you just get more grounded outputs the more you fill in.
 
 ## Updating
 
@@ -103,13 +81,47 @@ claude plugin update solution-work@solution-manager-plugin
 claude plugin uninstall solution-work@solution-manager-plugin
 ```
 
-## Try with Sample Data
+## Try It
+
+The repo includes sample data so you can test the plugin without your own files. Clone it and pick a path:
 
 ```bash
 git clone https://github.com/dakotaradigan/Solution-Manager-Plugin.git
 cd Solution-Manager-Plugin/sample-data
-# Open Claude Code and run /solution-work:synthesize-research
 ```
+
+### Option 1: Brainstorm a problem
+
+There's a messy intake — a forwarded email about a bad fill from stale pricing, plus a Slack thread where three people notice Bloomberg, Refinitiv, and the internal system all show different prices.
+
+```bash
+cd brainstorm
+# Open Claude Code, then:
+/solution-work:brainstorm
+# When asked what you're exploring, point it at problem-brief.md
+```
+
+### Option 2: Discover a codebase
+
+There's a Python portfolio management app with data models, 15 API endpoints, custodian recon, and drift calculation.
+
+```bash
+cd codebase
+# Open Claude Code, then:
+/solution-work:discover
+```
+
+### Option 3: Synthesize user research
+
+There are 5 research files — 3 interviews (trader, ops manager, quant), a 34-person survey, and workshop notes — all from a market data platform discovery.
+
+```bash
+cd research
+# Open Claude Code, then:
+/solution-work:synthesize-research
+```
+
+Each command produces output files and suggests what to run next. Or just run `/solution-work:start` and it will figure out which sample data to use.
 
 ## Optional: MCP Server Integrations
 

@@ -14,33 +14,28 @@ Display the complete command registry and usage guidance.
 1. **Display command registry:**
 
    ```
-   Solution Manager Toolkit v0.4.0
+   Solution Manager Toolkit v1.0.0
    ================================
 
    START HERE
      /solution-work:start                — Guided walkthrough: tell me what you're working on, I'll run the right commands
 
-   RESEARCH & DISCOVERY
-     /solution-work:synthesize-research  — Synthesize raw user research into themes, personas, problem statements
-     /solution-work:discover             — Analyze codebase for data models, APIs, dependencies
-     /solution-work:explain-code         — Explain what code does in plain, non-technical language
+   RESEARCH & DISCOVERY (Phase 1 — Solution Vision)
      /solution-work:brainstorm           — Interactive exploration of a problem space before formal definition
-
-   DEFINITION
-     /solution-work:generate-requirements — Generate user stories, acceptance criteria from problem statements
-     /solution-work:datamodel            — Define canonical data models with governance
-     /solution-work:apicontract          — Define contract-first API specifications
-     /solution-work:eventspec            — Define event schemas with delivery guarantees
-     /solution-work:nfr                  — Define non-functional requirements with measurable targets
-
-   PLANNING & ARCHITECTURE
+     /solution-work:synthesize-research  — Synthesize raw user research into themes, personas, problem statements
+     /solution-work:discover             — Analyze a codebase: technical inventory, business explainer, or both
      /solution-work:workshop-prep        — Generate workshop agendas and facilitation materials
-     /solution-work:piplan               — Prepare for SAFe PI Planning ceremony
-     /solution-work:architecture         — Facilitate architecture decisions with tradeoff matrices
+     /solution-work:generate-requirements — Generate user stories, acceptance criteria from problem statements
 
-   REVIEW & STATUS
-     /solution-work:review               — Run completeness and cross-reference checks on all artifacts
-     /solution-work:status               — Generate solution progress report
+   DEFINITION (Phase 2 — Solution Intent)
+     /solution-work:define               — Define solution artifacts: data models, API contracts, event specs, NFRs, operating model, migration path
+
+   PLANNING & ARCHITECTURE (Phase 3)
+     /solution-work:architecture         — Facilitate architecture decisions with tradeoff matrices
+     /solution-work:piplan               — Prepare for SAFe PI Planning with WSJF prioritization
+
+   REVIEW (Any Phase)
+     /solution-work:review               — Quick status check or deep completeness and cross-reference review
      /solution-work:help                 — Show this help
    ```
 
@@ -48,14 +43,17 @@ Display the complete command registry and usage guidance.
 
    ```
    Typical workflow:
-     1. brainstorm → 2. synthesize-research → 3. discover → 4. datamodel →
-     5. apicontract → 6. eventspec → 7. nfr → 8. review → 9. architecture → 10. piplan
+     Phase 1: brainstorm → synthesize-research → discover → generate-requirements
+     Phase 2: define (data model → API contract → event spec → NFRs → operating model → migration path)
+     Phase 3: architecture → piplan
+     Review:  review (run at any point to check progress)
 
    Quick start:
      - Exploring a new problem:    /solution-work:brainstorm
      - New project from research:  /solution-work:synthesize-research
      - Existing codebase:          /solution-work:discover
-     - Check what's done:          /solution-work:status
+     - Define technical artifacts: /solution-work:define
+     - Check what's done:          /solution-work:review
    ```
 
 3. **Show team setup note:**

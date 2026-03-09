@@ -11,7 +11,7 @@ Single entry point for the entire toolkit. Figures out where you are, picks the 
 
 ## Steps
 
-1. **Load context** — Read `references/team-context.md` and check for existing artifacts (`solution_state.md`, `synthesis/`, `discovery/`, `data-model/`, `requirements/`, `api-contracts/`, `event-specs/`, `review/`, `brainstorm/`). This tells us what's already been done.
+1. **Load context** — Read `references/team-context.md` and check for existing artifacts (`solution_state.md`, `synthesis/`, `discovery/`, `data-model/`, `requirements/`, `api-contracts/`, `event-specs/`, `operating-model/`, `review/`, `brainstorm/`, `workshop/`, `architecture/`, `pi-planning/`). This tells us what's already been done.
 
 2. **Ask what they're working on** — Present the situation and ask a simple question:
 
@@ -20,11 +20,10 @@ Single entry point for the entire toolkit. Figures out where you are, picks the 
 
    1. Exploring a new problem (not sure what to build yet)
    2. We have user research to process (interviews, surveys, feedback)
-   3. We have an existing codebase to map
-   4. We need someone to explain what code does (non-technical)
-   5. We need to define the solution (data models, APIs, events, NFRs)
-   6. We need to review what we've built so far
-   7. We're preparing for PI Planning
+   3. We have an existing codebase to understand
+   4. We need to define the solution (data models, APIs, events, NFRs, operating model, migration)
+   5. We need to review what we've built so far
+   6. We're preparing for PI Planning
 
    Or just describe what you're doing and I'll figure out where to start.
    ```
@@ -35,9 +34,8 @@ Single entry point for the entire toolkit. Figures out where you are, picks the 
    |---------------|----------|
    | Exploring a new problem | `brainstorm` → `generate-requirements` → `review` |
    | Have user research | `synthesize-research` → `generate-requirements` → `review` |
-   | Have an existing codebase | `discover` → `datamodel` → `apicontract` → `review` |
-   | Need code explained (non-technical) | `explain-code` |
-   | Need to define the solution | `datamodel` → `apicontract` → `eventspec` → `nfr` → `review` |
+   | Have an existing codebase | `discover` → `define` → `review` |
+   | Need to define the solution | `define` → `review` |
    | Need to review | `review` |
    | Preparing for PI Planning | `review` → `architecture` → `piplan` |
 

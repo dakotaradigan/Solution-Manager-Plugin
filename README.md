@@ -2,7 +2,7 @@
 
 Turn vague product problems into spec'd, reviewed, ready-to-build solution artifacts — without leaving your terminal.
 
-This is an AI plugin for investment management teams. You type slash commands, it walks you through structured workflows and writes the output as markdown files you can version, share, and build from. Backed by 16 commands, 4 agents, and 10 skills that handle everything from messy problem intake to ready-to-build artifacts. Don't know slash commands? Just describe what you need — the plugin picks the right skill and runs it automatically.
+This is an AI plugin for investment management teams. You type slash commands, it walks you through structured workflows and writes the output as markdown files you can version, share, and build from. Backed by 11 commands, 4 agents, and 12 skills that handle everything from messy problem intake to ready-to-build artifacts. Don't know slash commands? Just describe what you need — the plugin picks the right skill and runs it automatically.
 
 ## Quick Start
 
@@ -27,6 +27,7 @@ If you already know what you want, jump straight to any command:
 ```
 /solution-work:brainstorm       # "We have a problem but haven't scoped it yet"
 /solution-work:discover         # "We have a codebase — what's in it?"
+/solution-work:define           # "We need to define data models, APIs, NFRs..."
 /solution-work:synthesize-research  # "We have interview notes / survey data"
 /solution-work:help             # "Show me everything"
 ```
@@ -36,22 +37,17 @@ Type `/solution` and the command palette shows every available command with desc
 ```
 > /solution
 
-  /solution-work:start              Guided walkthrough — tell me what you're working on and I'll run the right commands
-  /solution-work:brainstorm         Interactive exploration of a problem space before formal definition
-  /solution-work:discover           Analyze an existing codebase to extract data models, API endpoints, dependencies
-  /solution-work:explain-code       Explain what code does in plain, non-technical language
+  /solution-work:start                Guided walkthrough — tell me what you're working on and I'll run the right commands
+  /solution-work:brainstorm           Interactive exploration of a problem space before formal definition
   /solution-work:synthesize-research  Synthesize raw user research into themes, personas, problem statements
+  /solution-work:discover             Analyze a codebase: technical inventory, business explainer, or both
+  /solution-work:workshop-prep        Generate workshop agendas and facilitation materials
   /solution-work:generate-requirements  Generate user stories, acceptance criteria from problem statements
-  /solution-work:datamodel          Define canonical data models with governance
-  /solution-work:apicontract        Define contract-first API specifications
-  /solution-work:eventspec          Define event schemas with delivery guarantees
-  /solution-work:nfr                Define non-functional requirements with measurable targets
-  /solution-work:architecture       Facilitate architecture decisions with tradeoff matrices
-  /solution-work:piplan             Prepare for SAFe PI Planning with WSJF prioritization
-  /solution-work:workshop-prep      Generate workshop agendas and facilitation materials
-  /solution-work:review             Run completeness and cross-reference checks across all artifacts
-  /solution-work:status             Generate solution progress report
-  /solution-work:help               Display command registry and workflow guidance
+  /solution-work:define               Define solution artifacts: data models, APIs, events, NFRs, operating model, migration
+  /solution-work:architecture         Facilitate architecture decisions with tradeoff matrices
+  /solution-work:piplan               Prepare for SAFe PI Planning with WSJF prioritization
+  /solution-work:review               Quick status check or deep completeness and cross-reference review
+  /solution-work:help                 Display command registry and workflow guidance
 ```
 
 You describe a problem. The toolkit walks you through defining it. Every output is a markdown file. Nothing is locked in a tool — you own the artifacts.

@@ -11,8 +11,8 @@
   "plugins": [
     {
       "name": "solution-work",
-      "description": "Solution management for investment management teams. 16 commands from brainstorm through PI Planning. Run /solution-work:start to begin.",
-      "version": "0.4.0",
+      "description": "Solution management for investment management teams. 11 commands, 12 skills, 4 agents from brainstorm through PI Planning. Run /solution-work:start to begin.",
+      "version": "1.0.0",
       "author": {
         "name": "Dakota Radigan",
         "url": "https://github.com/dakotaradigan"

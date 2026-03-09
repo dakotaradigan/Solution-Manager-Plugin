@@ -8,14 +8,22 @@ Commands that create artifacts will update `solution_state.md` if it exists.
 
 ```yaml
 project: [Project Name]
+phase: 0  # 0=Prioritization, 1=Discovery, 2=Solution Intent, 3=PI Planning, 4=Execution, 5=Review
 status: discovery
 last_updated: [today's date]
 
 artifacts:
+  # Phase 1 — Solution Vision
   research_synthesis:
     status: not started
     path: null
     last_command: null
+  brainstorm:
+    status: not started
+    path: null
+    last_command: null
+
+  # Phase 2 — Solution Intent
   canonical_data_model:
     status: not started
     path: null
@@ -32,6 +40,16 @@ artifacts:
     status: not started
     path: null
     last_command: null
+  target_operating_model:
+    status: not started
+    path: null
+    last_command: null
+  migration_path:
+    status: not started
+    path: null
+    last_command: null
+
+  # Phase 3+
   architecture_decisions:
     status: not started
     path: null
@@ -61,6 +79,13 @@ risks:
   #   likelihood: [high | medium | low]
   #   impact: [high | medium | low]
   #   mitigation: [Plan]
+
+prioritization_log:
+  # - initiative: [Name]
+  #   decision: [prioritized | deferred]
+  #   rationale: [Why]
+  #   date: [When]
+  #   framework: [MoSCoW | WSJF | Impact vs Effort]
 
 review_findings:
   completeness: []

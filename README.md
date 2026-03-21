@@ -89,7 +89,7 @@ cd Solution-Manager-Plugin/sample-data
 
 ### Option 1: Brainstorm a problem
 
-There's a messy intake — a forwarded email from an RM about a $50M prospect transitioning into direct indexing, plus a Slack thread where the transition analyst, PM, and RM debate tax budgets, wash sales across household accounts, and why the last proposal took six weeks.
+There's a messy intake — a forwarded email from an RM about a $50M prospect transitioning into direct indexing, plus a Slack thread where the transition analyst, PM, and RM debate tax budgets, wash sales across household accounts, and why the last proposal took one week.
 
 ```bash
 cd brainstorm

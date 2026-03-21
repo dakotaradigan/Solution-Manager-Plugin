@@ -89,7 +89,7 @@ cd Solution-Manager-Plugin/sample-data
 
 ### Option 1: Brainstorm a problem
 
-There's a messy intake — a forwarded email about a bad fill from stale pricing, plus a Slack thread where three people notice Bloomberg, Refinitiv, and the internal system all show different prices.
+There's a messy intake — a forwarded email from an RM about a $50M prospect transitioning into direct indexing, plus a Slack thread where the transition analyst, PM, and RM debate tax budgets, wash sales across household accounts, and why the last proposal took six weeks.
 
 ```bash
 cd brainstorm
@@ -100,7 +100,7 @@ cd brainstorm
 
 ### Option 2: Discover a codebase
 
-There's a Python portfolio management app with data models, 15 API endpoints, custodian recon, and drift calculation.
+There's a Python transition analysis platform with data models (transition requests, tax lots, scenarios), API endpoints, a tax calculator, and a transition optimizer.
 
 ```bash
 cd codebase
@@ -110,7 +110,7 @@ cd codebase
 
 ### Option 3: Synthesize user research
 
-There are 5 research files — 3 interviews (trader, ops manager, quant), a 34-person survey, and workshop notes — all from a market data platform discovery.
+There are 5 research files — 3 interviews (relationship manager, transition analyst, portfolio manager), a 31-person survey, and workshop notes — all from a transition analysis workflow discovery.
 
 ```bash
 cd research

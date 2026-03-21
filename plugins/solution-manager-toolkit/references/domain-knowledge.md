@@ -1,8 +1,8 @@
-# Domain Knowledge: Financial Services — Investment Management & Market Data
+# Domain Knowledge: Financial Services — Direct Indexing & Transition Analysis
 
 Domain-specific content for financial services solution management. Commands and agents reference this file for identifiers, NFR defaults, regulatory requirements, failure modes, and validation flags.
 
-This file reflects the domain of systematic investment management firms (custom indexing, overlay strategies, tax-managed portfolios) and the market data infrastructure that supports them.
+This file reflects the domain of direct indexing firms — specifically the transition analysis workflow: modeling what happens when an investor moves an existing portfolio into a new investment strategy. Analyzes tax impact, tracking error, turnover, and generates scenario-based proposals.
 
 ## Financial Instrument Identifiers
 
@@ -19,20 +19,37 @@ This file reflects the domain of systematic investment management firms (custom 
 
 ## Investment Management Concepts
 
-### Portfolio Construction & Management
+### Direct Indexing & Portfolio Construction
 
 | Concept | Definition |
 |---------|-----------|
 | Direct indexing | Owning individual securities to replicate an index, enabling tax-loss harvesting and customization at the account level |
-| Overlay strategy | Managing exposures (currency, duration, beta) across accounts without changing underlying holdings |
-| Tax-loss harvesting (TLH) | Selling positions at a loss to offset gains, replacing with correlated substitutes to maintain exposure |
-| Wash sale rule | IRS rule prohibiting repurchase of substantially identical security within 30 days before/after a loss sale |
 | Custom indexing | Building bespoke benchmarks with client-specific exclusions (ESG screens, concentrated stock, sector tilts) |
 | Model portfolio | Target allocation template applied across many accounts with account-level customization |
+| Tax-loss harvesting (TLH) | Selling positions at a loss to offset gains, replacing with correlated substitutes to maintain exposure |
+| Wash sale rule | IRS rule prohibiting repurchase of substantially identical security within 30 days before/after a loss sale |
+| Overlay strategy | Managing exposures (currency, duration, beta) across accounts without changing underlying holdings |
 | Drift / rebalancing | Deviation from target weights triggering trade generation to restore alignment |
 | Sleeve | Sub-allocation within an account managed by a specific strategy or manager |
-| Transition management | Moving a portfolio from one strategy/manager to another while minimizing cost and tax impact |
 | Completion portfolio | Filling gaps in a client's total exposure by building around existing concentrated positions |
+
+### Transition Analysis
+
+| Concept | Definition |
+|---------|-----------|
+| Transition analysis | Modeling what happens when a portfolio moves from one strategy/manager to another — tax impact, tracking error, turnover, and scenario comparison |
+| Clean transition | Full liquidation of source portfolio and rebuy into target model — best tracking error, worst tax impact |
+| In-kind transition | Retain positions that overlap with the target model, only sell non-overlapping — best tax outcome, higher tracking error |
+| Tax-budget transition | Constrained optimization — minimize tracking error subject to a ceiling on realized gains the client will accept |
+| Tracking error | Statistical measure of how closely a portfolio follows its benchmark, measured in basis points |
+| Active share | Percentage of portfolio holdings that differ from the target model |
+| Tax budget | Maximum realized gains a client is willing to accept in a transition year |
+| Concentrated position | A holding significantly overweight vs. the model, often restricted from sale (family legacy, company stock, estate planning) |
+| Transition cost analysis (TCA) | Total cost of transitioning: taxes + trading costs + opportunity cost of tracking error during transition period |
+| Tradeoff curve | Efficient frontier showing tracking error vs. tax impact at various tax budget levels — the key deliverable for client proposals |
+| In-kind transfer rate | Percentage of portfolio market value retained as-is during transition |
+| Factor tilt | Unintended exposure to risk factors (value, momentum, size) introduced by retaining positions for tax reasons |
+| Turnover rate | Percentage of portfolio value traded during transition |
 
 ### Account Structures
 
@@ -44,35 +61,48 @@ This file reflects the domain of systematic investment management firms (custom 
 | Household | Group of related accounts managed for aggregate tax efficiency |
 | Taxable vs tax-deferred | Different optimization rules: taxable accounts prioritize TLH, IRAs/401k ignore wash sales |
 
+### Tax Lot Management
+
+| Concept | Definition |
+|---------|-----------|
+| Tax lot | Individual purchase record: security, quantity, cost basis, acquisition date |
+| Cost basis | Original purchase price per share, used to calculate gain/loss on sale |
+| Lot selection | Choosing which tax lots to sell (highest cost, FIFO, specific ID) to optimize tax outcome |
+| Short-term vs long-term gains | Holding period < 1 year = short-term (taxed as ordinary income); >= 1 year = long-term (lower rate) |
+| Wash sale window | 30 days before and after a loss sale — cannot repurchase substantially identical security |
+| Household wash sale | Wash sale triggered by purchase in a different account within the same household (e.g., selling in taxable, buying in IRA) |
+| Cost basis step-up | Adjustment of cost basis at death, eliminating embedded gains — relevant for estate-planning-driven transitions |
+| Disallowed loss | Loss that cannot be recognized due to wash sale — added to cost basis of replacement lot |
+
 ### Order Management & Trading
 
 | Concept | Definition |
 |---------|-----------|
 | Trade generation | Algorithmic process comparing current holdings to target model, producing orders |
-| Block trading | Aggregating orders across accounts for better execution, then allocating fills |
 | Pre-trade compliance | Checking proposed trades against restrictions before execution |
 | Post-trade compliance | Verifying executed trades meet all restrictions after settlement |
 | Restriction | Account-level rule: do-not-buy, do-not-sell, sector cap, ESG screen, concentrated stock hold |
-| Cash management | Maintaining target cash levels, investing inflows, raising cash for outflows/fees |
-| Lot selection | Choosing which tax lots to sell (highest cost, FIFO, specific ID) to optimize tax outcome |
+| Block trading | Aggregating orders across accounts for better execution, then allocating fills |
 
-## Market Data NFR Defaults
+## Transition Analysis NFR Defaults
 
-Starting-point NFR values for market data and portfolio management systems.
+Starting-point NFR values for transition analysis and direct indexing systems.
 
 | Quality | Target | Conditions | Measurement |
 |---------|--------|------------|-------------|
-| Latency (real-time pricing) | p99 < 500ms | Market hours, streaming feeds | APM traces |
-| Latency (batch pricing) | < 15 min from market close | End-of-day pricing | Job completion logs |
-| Latency (trade generation) | < 5 min per 10k accounts | Rebalance run | Job duration logs |
-| Data freshness | < 1 min for actively traded instruments | During market hours | Staleness monitor |
-| Price accuracy | 99.99% match to exchange source | All instrument types | Recon vs exchange feed |
-| Availability | 99.95% during market hours | Trading days only | Uptime dashboard |
-| Tax lot accuracy | 100% match to custodian records | All accounts | Daily custodian recon |
-| Lineage | Full provenance from source to consumer | All data points | Lineage graph query |
-| Auditability | 7-year retention, immutable audit trail | All price changes, trade decisions | Audit log query |
-| Throughput (rebalance) | 50k accounts in < 30 min | Monthly full rebalance | Job metrics |
-| Throughput (market data) | 100k updates/sec sustained | Peak market volatility | Load test |
+| Scenario generation latency | < 30 sec for standard transition | < 500 positions, single account | API response time |
+| Scenario generation latency | < 5 min for complex transition | Multi-account household, 1000+ lots | Job completion logs |
+| Tax calculation accuracy | Lot-level match to custodian records | All tax lots with cost basis data | Custodian recon |
+| Tracking error accuracy | Within 5bps of production optimizer | Compared to institutional-grade optimizer | Backtest comparison |
+| Tradeoff curve generation | < 2 min for 10-point curve | Standard single-account transition | API response time |
+| Proposal turnaround SLA | < 48 hours for standard requests | Under 500 positions, complete data | Request timestamp to proposal sent |
+| Proposal turnaround SLA | < 5 business days for complex | Multi-account, concentrated positions | Request timestamp to proposal sent |
+| Holdings ingestion | < 5 min from file upload to parsed lots | Any supported custodian format | Pipeline metrics |
+| Security mapping success rate | > 95% auto-matched to internal master | US equities and ETFs | Mapping logs |
+| Wash sale detection accuracy | 100% across household accounts | All accounts in household | Compliance audit |
+| Availability | 99.9% during business hours | Business days 7am-7pm ET | Uptime dashboard |
+| Audit trail completeness | Full provenance on every scenario | All scenario versions, approvals, changes | Audit log query |
+| Auditability | 7-year retention, immutable audit trail | All proposals, compliance checks, approvals | Audit log query |
 
 ## SAFe / PI Planning Terminology
 
@@ -92,25 +122,25 @@ Starting-point NFR values for market data and portfolio management systems.
 
 | Regulation | Jurisdiction | Key Requirements |
 |-----------|-------------|-----------------|
-| SEC Rule 204 / Reg SHO | US | Locate and deliver requirements for short sales |
 | Investment Advisers Act | US | Fiduciary duty, best execution, trade allocation fairness |
+| IRS wash sale rules | US | 30-day window for substantially identical securities |
+| IRS cost basis reporting | US | Brokers must report cost basis on covered securities (Form 1099-B) |
 | SOX | US | Financial reporting controls, audit trail, data integrity |
 | ERISA | US | Prudence and diversification requirements for retirement accounts |
-| Reg NMS | US | National best bid/offer, order protection rule |
+| SEC Rule 204 / Reg SHO | US | Locate and deliver requirements for short sales |
 | GDPR | EU | Personal data handling in client-facing analytics |
 | MiFID II | EU | Best execution, transaction reporting, data transparency |
-| Dodd-Frank | US | OTC derivatives reporting, swap data repositories |
 | BCBS 239 | Global | Risk data aggregation, accuracy, completeness, timeliness |
-| IRS wash sale rules | US | 30-day window for substantially identical securities |
 
 **Compliance flags for requirements review:**
 - Does this feature handle client PII? → GDPR / privacy review required
 - Does this feature affect trade execution or allocation? → Best execution / fairness review
 - Does this feature produce client reports or performance numbers? → GIPS / SOX controls review
 - Does this feature touch tax lot or cost basis data? → IRS reporting accuracy review
-- Does this feature aggregate risk data? → BCBS 239 compliance review
 - Does this feature involve retirement accounts? → ERISA fiduciary review
 - Does this feature generate trades across accounts? → Fair allocation review (no cherry-picking)
+- Does this feature involve wash sale detection? → IRS wash sale compliance review
+- Does this feature generate transition proposals? → Fiduciary duty review (tax impact disclosure)
 
 ## Common Failure Modes
 
@@ -118,33 +148,37 @@ Flag these during data model review, NFR definition, and architecture decisions:
 
 | Failure Mode | Description | Detection | Mitigation |
 |-------------|------------|-----------|------------|
-| Stale pricing | EOD prices not updated, yesterday's close used for rebalance | Staleness monitor, timestamp check | Alerts on missing updates, fallback hierarchy |
-| Wash sale violation | TLH sells a position that was bought within 30-day window in another account in the household | Pre-trade wash sale check across household | Cross-account wash sale engine, 30-day lookback |
-| Duplicate trades | Same rebalance generates orders twice due to incomplete job state | Idempotency check on rebalance run ID | Idempotency keys, rebalance state machine |
-| Restriction violation | Trade generated that violates account-level restrictions (ESG screen, do-not-buy) | Pre-trade compliance engine | Restriction check in trade generation pipeline |
-| Missing corporate actions | Stock splits, dividends not applied to positions before rebalance | CA calendar vs applied actions recon | Daily CA completeness check before rebalance |
-| Identifier mismatch | Same instrument with different IDs across custodians and internal systems | Cross-reference validation | Golden source identifier mapping (FIGI preferred) |
-| Drift miscalculation | Drift calculated on stale prices or missing positions | Price age check + position completeness check | Staleness gate before drift calculation |
-| Tax lot mismatch | Internal tax lot records diverge from custodian records | Daily custodian tax lot reconciliation | Automated recon with break resolution workflow |
-| Model-to-account mismatch | Target model updated but not propagated to all accounts | Model version tracking vs account version | Model version propagation with confirmation |
-| Cash drag | Uninvested cash sitting in accounts eroding performance | Cash balance monitoring vs target cash | Automated cash sweep / invest rules |
-| Holiday calendar gaps | Rebalance runs on exchange holidays (no prices to use) | Holiday calendar validation | Exchange-specific calendar integration |
-| Stale reference data | Instrument metadata (sector, country, currency) outdated causing misclassification | Age check on reference data | Periodic refresh from vendor, change detection |
+| Wash sale violation across household | TLH or transition sells a position at a loss while the same security was bought within 30-day window in another household account | Pre-trade wash sale check across all household accounts | Cross-account wash sale engine, 30-day lookback across household |
+| Missing cost basis | Custodian file lacks cost basis for transferred positions — tax impact can't be calculated | Cost basis completeness check on ingestion | Flag incomplete lots, request from custodian or client, block scenario generation until resolved |
+| Incorrect lot-level gain classification | Short-term/long-term misclassified due to wrong acquisition date | Compare acquisition dates to holding period threshold | Validate acquisition dates against custodian records |
+| Concentrated position sold in error | Restricted position (do-not-sell, family legacy) included in transition trades | Pre-trade restriction check against concentrated position list | Restriction engine integrated into optimizer, compliance gate before proposal |
+| Stale pricing in tax calculations | Tax impact calculated on yesterday's prices, producing inaccurate gain/loss estimates | Price timestamp validation | Require same-day pricing for scenario generation, fallback with staleness warning |
+| Factor tilt from in-kind retention | Keeping positions for tax reasons introduces unintended factor exposures (value overweight, sector concentration) | Factor analysis on proposed post-transition portfolio | Factor exposure check in optimizer, flag tilts exceeding threshold |
+| Duplicate transition request | Same prospect submitted via email and Slack, two analysts start modeling independently | Dedup check on client name + household ID | Intake system with dedup rules, request acknowledgment |
+| Scenario version confusion | Client asks for changes, analyst modifies scenario in-place, PM reviewed an older version | Version mismatch between PM approval and current scenario | Version control on scenarios, approval tracks specific version ID |
+| Tax budget overrun | Optimizer produces scenario with realized gains exceeding client's stated budget | Tax budget constraint validation | Hard constraint in optimizer, flag scenarios within 5% of budget ceiling |
+| Multi-asset modeling gap | Client has equities + fixed income + alternatives but system models each separately | Asset class coverage check | Unified multi-asset optimizer or explicit cross-sleeve reconciliation |
+| Settlement timing mismatch | Transition trades assume T+1 settlement but international securities settle T+2 | Settlement cycle validation per security | Exchange-specific settlement calendar integration |
+| Proposal sent without compliance review | Analyst generates and sends proposal before compliance clears restrictions | Compliance gate in proposal generation workflow | Require compliance_cleared status before proposal generation |
 
 ## Financial Services Validation Flags
 
-When reviewing any artifact, check for these investment-management-specific concerns:
+When reviewing any artifact, check for these transition-analysis-specific concerns:
 
-- **Multi-asset coverage** — Does the solution handle equities, fixed income, ETFs, derivatives, alternatives? Flag if only single-asset.
-- **Account-level customization** — Can the system apply different rules per account (restrictions, tax status, cash targets)?
-- **Household awareness** — Does the system see across accounts in a household for wash sale checks and tax coordination?
-- **Tax status handling** — Does it distinguish taxable, tax-deferred (IRA), tax-exempt (Roth) and apply different logic?
-- **Custodian integration** — Which custodians (Schwab, Fidelity, Pershing, BNY)? File formats? Reconciliation cadence?
-- **Model vs account distinction** — Is there a clear separation between the target model and individual account holdings?
-- **Lot-level tracking** — Does the system track individual tax lots with purchase date, cost basis, and holding period?
-- **Corporate actions** — How are stock splits, mergers, dividends, spinoffs, delistings handled at the lot level?
-- **Settlement cycles** — T+1 (US equities), T+2 (international), T+0 (treasuries) — is settlement aware?
-- **Vendor dependency** — Bloomberg, Refinitiv, ICE, FactSet, index providers (MSCI, S&P, FTSE) — which vendors? SLA terms? Failover?
-- **Golden source** — Is there a single source of truth for pricing, positions, restrictions, and models?
-- **Scalability** — Can it handle 50k+ accounts in a single rebalance run?
-- **Audit trail** — Can every trade decision be traced back to the model, the drift trigger, the lot selection logic, and the restriction check?
+- **Intake standardization** — Is there a structured intake form/API, or do requests arrive as unstructured email/Slack? Flag if no standard intake.
+- **Household awareness** — Does the system see across all accounts in a household for wash sale checks and aggregate tax optimization?
+- **Tax status handling** — Does it distinguish taxable, tax-deferred (IRA), tax-exempt (Roth) and apply different tax logic per account?
+- **Lot-level tracking** — Does the system track individual tax lots with acquisition date, cost basis, and holding period?
+- **Cost basis completeness** — What happens when custodian data is missing cost basis? Is there a fallback or blocking workflow?
+- **Concentrated position handling** — Can the system identify, flag, and build around positions the client won't sell?
+- **Wash sale detection scope** — Does wash sale checking cover the full household, or only the account being transitioned?
+- **Tracking error vs. tax tradeoff** — Can the system produce a tradeoff curve, not just discrete scenarios?
+- **Factor exposure analysis** — Does in-kind transfer analysis check for unintended factor tilts from retained positions?
+- **Multi-asset coverage** — Can the system model equities, fixed income, ETFs, and alternatives in a single transition?
+- **Custodian integration** — Which custodians (Schwab, Fidelity, Pershing, BNY)? File formats? Auto-ingestion or manual upload?
+- **Scenario versioning** — Can the system track scenario versions, link approvals to specific versions, and compare side-by-side?
+- **Compliance integration** — Are restriction checks (do-not-buy, sector caps, ESG screens) run during modeling or only after?
+- **Proposal output format** — Structured JSON for interactive rendering, or static PDF? Does the client see a tradeoff curve?
+- **Audit trail** — Can every scenario be traced back to the intake request, the holdings data, the tax calculations, and the compliance review?
+- **SLA tracking** — Is there a defined turnaround SLA, and does the system track time-to-proposal?
+- **Scalability** — Can the system handle 50+ concurrent transition requests without analyst bottleneck?

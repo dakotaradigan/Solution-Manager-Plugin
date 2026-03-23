@@ -31,6 +31,7 @@ Facilitate early-stage exploration of a problem before committing to formal arti
    - What's the rough effort level?
    - What assumptions does it make?
    - Has something like this been tried before?
+   - What's the addressable market or opportunity size? Reference the `market-sizing` skill for TAM/SAM/SOM framework if relevant.
 
 5. **Surface constraints** — Prompt for constraints the team might not have articulated:
    - Regulatory (reference domain knowledge for applicable regulations)
@@ -65,6 +66,9 @@ Facilitate early-stage exploration of a problem before committing to formal arti
 
      ## Constraints
      - [constraint list]
+
+     ## Market Opportunity (Draft)
+     [If market sizing was explored — rough TAM/SAM/SOM or skip if not applicable]
 
      ## Decisions Made
      - [decision list]

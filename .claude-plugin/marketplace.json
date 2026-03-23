@@ -6,13 +6,13 @@
   },
   "metadata": {
     "description": "Solution management plugins for Claude Code",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "plugins": [
     {
       "name": "solution-work",
-      "description": "Solution management for investment management teams. 11 commands, 12 skills, 4 agents from brainstorm through PI Planning. Run /solution-work:start to begin.",
-      "version": "1.0.0",
+      "description": "Solution management for investment management teams. 11 commands, 14 skills, 5 agents from brainstorm through PI Planning. Run /solution-work:start to begin.",
+      "version": "1.1.0",
       "author": {
         "name": "Dakota Radigan",
         "url": "https://github.com/dakotaradigan"

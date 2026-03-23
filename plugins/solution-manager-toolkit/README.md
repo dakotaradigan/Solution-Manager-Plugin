@@ -2,67 +2,131 @@
 
 Turn vague product problems into spec'd, reviewed, ready-to-build solution artifacts — without leaving your terminal.
 
-This is an AI plugin for investment management teams. You type slash commands, it walks you through structured workflows and writes the output as markdown files you can version, share, and build from. Backed by 11 commands, 4 agents, and 12 skills that handle everything from messy problem intake to ready-to-build artifacts. Don't know slash commands? Just describe what you need — the plugin picks the right skill and runs it automatically.
+An AI plugin for [Claude Code](https://claude.com/claude-code) built for investment management teams. It walks you through structured PM workflows and writes the output as markdown files you own.
 
-## Quick Start
+## One Command to Remember
+
+```
+/solution-work:start
+```
+
+It asks what you're working on and runs the right workflow. That's it.
+
+## When Would I Use This?
+
+**"We got a new client request and I need to think it through."**
+Run `/solution-work:start` → "Exploring a new problem" → It asks about the problem, stakeholders, constraints, and market opportunity. Outputs a brainstorm summary with approaches, tradeoffs, and open questions.
+
+**"I have 5 interview transcripts and need to make sense of them."**
+Run `/solution-work:synthesize-research` → It reads all files in parallel, extracts themes, builds personas, writes problem statements. Every finding traces back to its source.
+
+**"We need to define the data model and APIs before the team starts building."**
+Run `/solution-work:define` → Pick what to define (data model, API contract, event spec, NFRs, operating model, migration path). It walks you through each one with investment management defaults baked in.
+
+**"Is our solution complete? What are we missing?"**
+Run `/solution-work:review` → Pick your review type:
+- **Status** — quick progress check
+- **Deep** — parallel agents check every artifact against checklists
+- **Stakeholder** — 5 AI agents simultaneously review your work as CTO, UX Lead, Sales, Executive, and Devil's Advocate. Surfaces where they agree, where they conflict, and what everyone missed.
+
+**"We have PI Planning next week."**
+Run `/solution-work:piplan` → Breaks features into sprint-sized work, scores priorities with WSJF, maps cross-team dependencies, drafts PI objectives.
+
+**"We lost that RFP — what happened?"**
+Run `/solution-work:review` at Phase 5 → It uses the win/loss analysis framework: decision factors, competitive positioning, what worked, what didn't, actionable changes.
+
+## How It Works
+
+```
+You describe a problem
+    ↓
+The toolkit asks structured questions
+    ↓
+It writes markdown files as output
+    ↓
+It suggests what to run next
+```
+
+Each command produces files and tells you the next step. The natural flow:
+
+```
+brainstorm → synthesize-research → generate-requirements → define → review → piplan
+```
+
+You don't have to follow the chain. Jump to any command directly if you know what you need.
+
+## Install
 
 ```bash
-# Install (one time)
 claude plugin marketplace add https://github.com/dakotaradigan/Solution-Manager-Plugin
 claude plugin install solution-work@solution-manager-plugin
 claude plugin enable solution-work@solution-manager-plugin
 # Restart Claude Code
 ```
 
-Then run:
+## All Commands
 
-```
-/solution-work:start
-```
+| When you need to... | Run this |
+|---------------------|----------|
+| Figure out where to start | `/solution-work:start` |
+| Explore a problem before committing | `/solution-work:brainstorm` |
+| Make sense of interviews or surveys | `/solution-work:synthesize-research` |
+| Understand an existing codebase | `/solution-work:discover` |
+| Prepare workshop materials | `/solution-work:workshop-prep` |
+| Write user stories and acceptance criteria | `/solution-work:generate-requirements` |
+| Define data models, APIs, events, NFRs | `/solution-work:define` |
+| Make architecture decisions with tradeoffs | `/solution-work:architecture` |
+| Prepare for SAFe PI Planning | `/solution-work:piplan` |
+| Check completeness or get stakeholder perspectives | `/solution-work:review` |
+| See all commands | `/solution-work:help` |
 
-It asks what you're working on, picks the right workflow, and walks you through each step. That's the only command you need to remember. Don't have your own data yet? [Try it with the sample data below.](#try-it)
+Or just type `/solution` in Claude Code and browse the command palette.
 
-If you already know what you want, jump straight to any command:
+## What Are Skills and Agents?
 
-```
-/solution-work:brainstorm       # "We have a problem but haven't scoped it yet"
-/solution-work:discover         # "We have a codebase — what's in it?"
-/solution-work:define           # "We need to define data models, APIs, NFRs..."
-/solution-work:synthesize-research  # "We have interview notes / survey data"
-/solution-work:help             # "Show me everything"
-```
+You never need to invoke these directly — they work behind the scenes.
 
-Type `/solution` and the command palette shows every available command with descriptions:
+**Skills** are domain knowledge (~30 lines each). When a command needs to know about TAM/SAM/SOM market sizing or NFR formats, it references the right skill automatically. There are 14 skills covering everything from API contracts to win/loss analysis.
 
-```
-> /solution
-
-  /solution-work:start                Guided walkthrough — tell me what you're working on and I'll run the right commands
-  /solution-work:brainstorm           Interactive exploration of a problem space before formal definition
-  /solution-work:synthesize-research  Synthesize raw user research into themes, personas, problem statements
-  /solution-work:discover             Analyze a codebase: technical inventory, business explainer, or both
-  /solution-work:workshop-prep        Generate workshop agendas and facilitation materials
-  /solution-work:generate-requirements  Generate user stories, acceptance criteria from problem statements
-  /solution-work:define               Define solution artifacts: data models, APIs, events, NFRs, operating model, migration
-  /solution-work:architecture         Facilitate architecture decisions with tradeoff matrices
-  /solution-work:piplan               Prepare for SAFe PI Planning with WSJF prioritization
-  /solution-work:review               Quick status check or deep completeness and cross-reference review
-  /solution-work:help                 Display command registry and workflow guidance
-```
-
-You describe a problem. The toolkit walks you through defining it. Every output is a markdown file. Nothing is locked in a tool — you own the artifacts.
+**Agents** are parallel workers. When you run a stakeholder review, the plugin launches 5 agents simultaneously — one per perspective. When you run a deep review, it launches completeness checkers in parallel for every artifact. There are 5 agents that handle the heavy lifting.
 
 ## Team Setup
 
-The toolkit ships with investment management domain knowledge (instruments, regulations, failure modes). To get the most out of it, fill in your team's specific context.
+The toolkit ships with investment management domain knowledge. To get the most out of it, fill in your team's context.
 
 | File | What It Contains | Action |
 |------|-----------------|--------|
-| `references/domain-knowledge-base.md` | Generic checklists, NFR format, review patterns | Keep as-is |
 | `references/domain-knowledge.md` | Investment management domain knowledge | Review and extend for your firm |
 | `references/team-context.md` | **Your team's systems, org structure** | **Fill in for your team** |
+| `references/domain-knowledge-base.md` | Generic checklists and review patterns | Keep as-is |
 
-Commands still work without team context — you just get more grounded outputs the more you fill in.
+Commands still work without team context — you just get more specific outputs the more you fill in.
+
+## Try It
+
+The repo includes sample data so you can test without your own files.
+
+```bash
+git clone https://github.com/dakotaradigan/Solution-Manager-Plugin.git
+cd Solution-Manager-Plugin/sample-data
+```
+
+**Brainstorm a problem** — A forwarded email from an RM about a $50M prospect transitioning into direct indexing, plus a Slack thread debating tax budgets and wash sales.
+```bash
+cd brainstorm && /solution-work:brainstorm
+```
+
+**Discover a codebase** — A Python transition analysis platform with data models, API endpoints, and a tax calculator.
+```bash
+cd codebase && /solution-work:discover
+```
+
+**Synthesize research** — 3 interviews, a 31-person survey, and workshop notes from a transition analysis workflow discovery.
+```bash
+cd research && /solution-work:synthesize-research
+```
+
+Each command produces output files and suggests what to run next.
 
 ## Updating
 
@@ -72,57 +136,9 @@ claude plugin update solution-work@solution-manager-plugin
 # Restart Claude Code
 ```
 
-## Uninstall
-
-```bash
-claude plugin uninstall solution-work@solution-manager-plugin
-```
-
-## Try It
-
-The repo includes sample data so you can test the plugin without your own files. Clone it and pick a path:
-
-```bash
-git clone https://github.com/dakotaradigan/Solution-Manager-Plugin.git
-cd Solution-Manager-Plugin/sample-data
-```
-
-### Option 1: Brainstorm a problem
-
-There's a messy intake — a forwarded email from an RM about a $50M prospect transitioning into direct indexing, plus a Slack thread where the transition analyst, PM, and RM debate tax budgets, wash sales across household accounts, and why the last proposal took six weeks.
-
-```bash
-cd brainstorm
-# Open Claude Code, then:
-/solution-work:brainstorm
-# When asked what you're exploring, point it at problem-brief.md
-```
-
-### Option 2: Discover a codebase
-
-There's a Python transition analysis platform with data models (transition requests, tax lots, scenarios), API endpoints, a tax calculator, and a transition optimizer.
-
-```bash
-cd codebase
-# Open Claude Code, then:
-/solution-work:discover
-```
-
-### Option 3: Synthesize user research
-
-There are 5 research files — 3 interviews (relationship manager, transition analyst, portfolio manager), a 31-person survey, and workshop notes — all from a transition analysis workflow discovery.
-
-```bash
-cd research
-# Open Claude Code, then:
-/solution-work:synthesize-research
-```
-
-Each command produces output files and suggests what to run next. Or just run `/solution-work:start` and it will figure out which sample data to use.
-
 ## Optional: MCP Server Integrations
 
-The plugin works standalone with local markdown files. To push outputs to external tools, configure these MCP servers:
+The plugin works standalone with local markdown files. To push outputs to external tools:
 
 | Tool | MCP Server | What It Enables |
 |------|-----------|----------------|

@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2026-03-22
+
+### Added
+- **Multi-perspective stakeholder review** — New review type launching up to 5 parallel perspective-reviewer agents (CTO, UX Lead, Sales, Executive, Devil's Advocate) with inline synthesis. Users can select which perspectives to run. Surfaces agreements, conflicts, and blind spots across perspectives.
+- **Market sizing skill** — TAM/SAM/SOM domain knowledge with investment management defaults (fee rates, channels, gatekeepers). Referenced from brainstorm command.
+- **Win/loss analysis skill** — Structured post-decision analysis framework for RFPs and competitive outcomes. Referenced from review command at Phase 5.
+- New agent: `perspective-reviewer`
+- New skills: `market-sizing`, `win-loss-analysis`
+
+### Changed
+- `review` command now offers 3 review types: status, deep, stakeholder
+- `brainstorm` command references market-sizing skill in approach exploration
+- `solution-state-template.md` adds `stakeholder` key under review_findings
+
 ## [0.2.0] - 2026-03-07
 
 ### Added

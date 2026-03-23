@@ -35,7 +35,7 @@ Plugin name: `solution-work` — commands invoked as `/solution-work:<command>`.
 
 Commands reference `base` and `domain-knowledge` by section heading. Required sections in domain-knowledge: Domain Identifiers, NFR Defaults, Regulatory Requirements, Common Failure Modes, Domain Validation Flags. Missing sections degrade gracefully (commands skip domain checks, don't crash). Team context is optional but enriches discover, piplan, architecture, and review.
 
-## Command Registry (11 commands)
+## Command Registry (11 commands, 14 skills, 5 agents)
 
 ### Start Here
 | Command | Description |
@@ -65,7 +65,7 @@ Commands reference `base` and `domain-knowledge` by section heading. Required se
 ### Review (Any Phase)
 | Command | Description |
 |---------|-------------|
-| `review` | Quick status check or deep completeness and cross-reference review |
+| `review` | Quick status, deep completeness/cross-reference, or multi-perspective stakeholder review |
 | `help` | Display command registry and workflow guidance |
 
 ## Workflow Chain
@@ -74,11 +74,11 @@ Commands reference `base` and `domain-knowledge` by section heading. Required se
 brainstorm → synthesize-research → discover → generate-requirements → define → review → architecture → piplan
 ```
 
-## Skills (12)
+## Skills (14)
 
-research-synthesizer, requirements-generator, workshop-prep, codebase-discovery, code-explainer, nfr-definition, canonical-data, api-contracts, event-integration, operating-model, migration-path, pi-planning
+research-synthesizer, requirements-generator, workshop-prep, codebase-discovery, code-explainer, nfr-definition, canonical-data, api-contracts, event-integration, operating-model, migration-path, pi-planning, market-sizing, win-loss-analysis
 
-## Agents (4)
+## Agents (5)
 
 | Agent | Role |
 |-------|------|
@@ -86,12 +86,13 @@ research-synthesizer, requirements-generator, workshop-prep, codebase-discovery,
 | `institutional-knowledge-check` | Senior review for gaps and blind spots |
 | `completeness-checker` | Single artifact review against checklists + domain flags |
 | `cross-reference-checker` | Cross-artifact consistency and traceability |
+| `perspective-reviewer` | Multi-perspective stakeholder review (CTO, UX, Sales, Executive, Devil's Advocate) |
 
 ## Operating Rules
 
 - Commands that create artifacts update `solution_state.md` if it exists
 - Commands suggest the next logical command in the workflow chain
-- `review` launches completeness-checker + cross-reference-checker in parallel
+- `review` launches completeness-checker + cross-reference-checker in parallel, or perspective-reviewer agents for stakeholder review
 - Skills are domain knowledge (~30 lines), not workflows
 - All NFRs follow the format: Quality + Target + Conditions + Measurement
 - The `define` command enforces: ASKS FOR = API, HAPPENS = event
@@ -107,8 +108,8 @@ references/
   team-context.md                # your team's systems, custodians, org (fill in)
   solution-state-template.md
 commands/        (11 command files)
-skills/          (12 skill directories)
-agents/          (4 agent files)
+skills/          (14 skill directories)
+agents/          (5 agent files)
 ```
 
 ## Installation

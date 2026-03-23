@@ -90,6 +90,7 @@ prioritization_log:
 review_findings:
   completeness: []
   cross_reference: []
+  stakeholder: []
 ```
 
 ## Usage

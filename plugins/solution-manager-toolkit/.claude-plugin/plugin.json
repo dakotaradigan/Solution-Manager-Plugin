@@ -1,7 +1,7 @@
 {
   "name": "solution-work",
-  "version": "1.0.0",
-  "description": "Solution Management Assistant for investment management firms — 11 commands, 12 skills, 4 agents for the full solution lifecycle from research through PI Planning.",
+  "version": "1.1.0",
+  "description": "Solution Management Assistant for investment management firms — 11 commands, 14 skills, 5 agents for the full solution lifecycle from research through PI Planning.",
   "author": {
     "name": "Dakota Radigan",
     "url": "https://github.com/dakotaradigan"

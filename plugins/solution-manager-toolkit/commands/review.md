@@ -1,13 +1,13 @@
 ---
 name: solution-work:review
-description: Check solution progress — quick status or deep completeness and cross-reference review
+description: Check solution progress — quick status, deep completeness and cross-reference review, or multi-perspective stakeholder review
 allowed-tools: Read, Glob, Grep, Write, Agent, Bash
 user-invocable: true
 ---
 
 # Review
 
-Check solution progress. Can run as a quick status check or a deep completeness and cross-reference review.
+Check solution progress. Can run as a quick status check, a deep completeness and cross-reference review, or a multi-perspective stakeholder review.
 
 ## Steps
 
@@ -21,7 +21,9 @@ Check solution progress. Can run as a quick status check or a deep completeness 
 
    1. Status — Quick progress summary (what exists, what's missing, next steps)
    2. Deep review — Completeness checks + cross-reference consistency across all artifacts
+   3. Stakeholder review — Multi-perspective review from CTO, UX, Sales, Executive, and Devil's Advocate
    ```
+   For stakeholder review, ask: "Run all 5 perspectives or select specific ones?" Default: all 5.
 
 4. **Status review (light pass):**
    - For each artifact category, determine status: Complete / In progress / Not started
@@ -40,6 +42,7 @@ Check solution progress. Can run as a quick status check or a deep completeness 
       - **Phase 1 (Discovery/Vision):** Do we have personas, journeys, problem statement?
       - **Phase 2 (Solution Intent):** Do we have all six artifacts? Flag missing target operating model or migration path: "You've defined the technical solution but not how people and processes change."
       - **Phase 3+ (PI Planning and beyond):** Are PI objectives traceable to solution vision? Are NFRs being validated?
+      - **Phase 5 (Review):** Are outcomes being captured? Reference the `win-loss-analysis` skill for post-decision analysis framework. Flag if review artifacts exist but lack outcome traceability.
 
    d. **Collect results** — Merge findings into a single review report.
 
@@ -48,9 +51,25 @@ Check solution progress. Can run as a quick status check or a deep completeness 
       - `review/cross-reference-report.md` — Cross-artifact consistency findings
       - `review/action-items.md` — Prioritized gaps sorted by severity
 
-6. **Update solution state** — If `solution_state.md` exists, update `review_findings` and phase tracker.
+6. **Stakeholder review (multi-perspective):**
 
-7. **Present summary** — Show: overall progress, critical issues, and top action items with specific commands to address them (e.g., "run `/solution-work:define` to add missing NFRs").
+   a. **Launch perspective agents in parallel** — Use the Agent tool to launch a `perspective-reviewer` agent for each selected role. Pass each agent the role name, all artifact paths from step 1, and solution state context. Prompt format: "You are a perspective-reviewer agent. Your role is: [ROLE]. Review the following artifacts: [paths]. Solution state: [context]." If any agent fails, proceed with available results.
+
+   b. **Synthesize perspectives** — With all perspective outputs collected, perform cross-perspective analysis:
+      - **Agreements:** Findings raised by 3+ perspectives — high-confidence signals
+      - **Conflicts:** Findings where perspectives directly contradict (e.g., CTO says "needs more time" vs Executive says "ship sooner"). State who disagrees and what tradeoff is at stake.
+      - **Blind spots:** Areas no perspective addressed. Cross-check against domain knowledge regulatory requirements, lifecycle phase completeness, and common failure modes from `references/domain-knowledge.md`.
+      - **Prioritized actions:** Merge recommendations, deduplicate, rank by: Blockers first → Conflicts second → Multi-perspective concerns → Single-perspective concerns. Every action item suggests which command to run.
+
+   c. **Write stakeholder review outputs:**
+      - `review/stakeholder-perspectives-report.md` — All perspective reviews (concatenated with headers)
+      - `review/stakeholder-synthesis-report.md` — Synthesis (agreements, conflicts, blind spots, prioritized actions, resolution recommendations)
+
+   d. **Update solution state** — If `solution_state.md` exists, update `review_findings.stakeholder` with an array of top findings, format: `["[Severity] [Finding summary] (Source: [perspective(s)])", ...]`, max 5 items.
+
+7. **Update solution state** — If `solution_state.md` exists, update `review_findings` and phase tracker.
+
+8. **Present summary** — Show: overall progress, critical issues, and top action items with specific commands to address them (e.g., "run `/solution-work:define` to add missing NFRs").
 
 ## Important
 
@@ -61,3 +80,5 @@ Check solution progress. Can run as a quick status check or a deep completeness 
 - The review should make the author say "good catch."
 - Always recommend the next command to run based on what's missing.
 - If no `solution_state.md` exists, suggest creating one from the template.
+- If a perspective agent fails, proceed with available perspectives and note the gap in synthesis.
+- Stakeholder and deep reviews are independent — they write to separate files and do not conflict.
